@@ -4,11 +4,12 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def index():
-    return 'Method used {}'.format(request.method)
+@app.route("/<user>")
+def index(user=None):
+    return render_template("user.html", user=user)
 
 
-@app.route('/sam')
+@app.route('/me')
 def sam():
     return '<h2> Hii this is sam</h2>'
 
@@ -34,6 +35,12 @@ def test():
 @app.route('/profile/<name>')
 def profile(name):
     return render_template('profile.html', name=name)
+
+
+@app.route("/shopping")
+def shopping():
+    fruit = ["Mango","Banana", "Apple"]
+    return render_template("shopping.html", fruit=fruit)
 
 
 if __name__ == "__main__":
